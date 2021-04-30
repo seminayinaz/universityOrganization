@@ -4,7 +4,9 @@
 Course::Course(string semester, int ID, string syllabus, int numberOfHomeworks, int numberOfProjects):
     semester(semester), ID(ID), syllabus(syllabus), numberOfHomeworks(numberOfHomeworks), numberOfProjects(numberOfProjects){}
 
-Course::~Course(){}
+Course::~Course(){
+    prerequisiteCourses.clear();
+}
 
 void Course::setSyllabus(string syllabus){
     this -> syllabus = syllabus;
