@@ -21,7 +21,7 @@ class Course{
         ~Course();
         void setSyllabus(string syllabus);
         void addPrerequisite(string prerequisite);
-        string getSemester(){
+        string& getSemester(){
             return semester;
         }
         void printCourse(){
@@ -34,7 +34,7 @@ class Course{
 };
 
 typedef map<string,vector<Course>> CourseOffered;
-class Instructor{
+class Instructor : public UniversityMember {
     private:
         string fullName;
         int ID;
@@ -62,7 +62,7 @@ class Instructor{
 };
 typedef map<string,vector<Course>> CourseOffered;
 typedef map<string,vector<string>> FacultyMembers;
-class Department{
+class Department : public Instructor {
     private:
         string deptName;
         string facultyName;
@@ -77,4 +77,45 @@ class Department{
         void removeCourse(string course);
         void printCoursesOffered();
         
+};
+class UniversityMember{
+    private:
+        string fullName;
+        int ID;
+        int startingDate;
+};
+
+class Faculty : public Department {
+    private:
+        string departments;
+    public:
+        Faculty(string departments);
+        ~Faculty();
+        void addDepartment();
+        void removeDepartment();
+
+};
+enum StudentClass {freshman, sophomore, junior, senior};
+typedef map<string,vector<string>> Transcript;
+class Student : public UniversityMember{
+    private:
+        StudentClass studentClass;
+        string fullName;
+        int ID;
+        int startingDate;
+        string takenCourses;
+        string completedCourses;
+        string letterGrades;
+        int GPA;
+        Transcript transcript;
+    public:
+        Student(string takenCourses, string completedCourses,string letterGrades,int GPA);
+        ~Student();
+        int getGPA();
+        void printTranscript();
+        void printStudent(){
+            cout << "Full Name: "  << fullName << "\nID: " << ID << "\nStarting Date: " << startingDate << "\nTaken courses: " << takenCourses;
+            cout << "\nCompleted courses: " << completedCourses << "\nLetter grades: " << letterGrades << "\nGPA: " << GPA ; 
+        }
+
 };
