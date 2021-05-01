@@ -7,7 +7,6 @@ Course::Course(string semester, int ID, string syllabus, int numberOfHomeworks, 
 Course::~Course(){
     prerequisiteCourses.clear();
 }
-
 void Course::setSyllabus(string syllabus){
     this -> syllabus = syllabus;
 }
@@ -18,8 +17,14 @@ void Course::addPrerequisite(string prerequisite){
 Instructor::Instructor(string fullName,int ID,int startingDate,int department,bool isProfessor,string laboratoryName):
     fullName(fullName),ID(ID),startingDate(startingDate),department(department),fullTime(isProfessor),laboratoryName(laboratoryName){}
 
-
 Instructor::~Instructor(){}
+
+void Instructor::setJournalPapers(int journalPapers){
+    this-> journalPapers = journalPapers;
+}
+void Instructor::setConferencePapers(int conferencePapers){
+    this-> conferencePapers = conferencePapers; 
+}
 
 bool Instructor::isProfessor(){
     if(fullTime)
@@ -28,12 +33,10 @@ bool Instructor::isProfessor(){
         cout << "not a professor\n";
     return fullTime;
 }
-
 void Instructor::addCourse(Course course) {
     string semester = course.getSemester();
     courseOffered[semester].push_back(course);
     }
-
 void Instructor::removeCourse(string course) {
     for(auto& semesterCourses : courseOffered) {
         vector<Course>& courses = semesterCourses.second;
@@ -45,6 +48,34 @@ void Instructor::removeCourse(string course) {
     }
 }
 void Instructor::printCoursesOffered() {
+    for(auto& semesterCourses : courseOffered) {  
+        cout << "semester: " << semesterCourses.first << "\ncourses:\n";
+        for(auto& courses : semesterCourses.second)
+          courses.printCourse();
+        cout << '\n';
+    }
+}
+
+Department::Department(string deptName, string facultyName, string students, string deptPresidentName):
+    deptName(deptName), facultyName(facultyName), students(students), deptPresidentName(deptPresidentName){}
+
+Department::~Department(){}
+
+void Department::addCourse(Course course) {
+    string semester = course.getSemester();
+    courseOffered[semester].push_back(course);
+    }
+void Department::removeCourse(string course) {
+    for(auto& semesterCourses : courseOffered) {
+        vector<Course>& courses = semesterCourses.second;
+        auto it = find(courses.begin(), courses.end(), course);
+        if(it != courses.end()) {
+          courses.erase(it);
+          break;
+        }
+    }
+}
+void Department::printCoursesOffered() {
     for(auto& semesterCourses : courseOffered) {  
         cout << "semester: " << semesterCourses.first << "\ncourses:\n";
         for(auto& courses : semesterCourses.second)
