@@ -32,6 +32,7 @@ class Course{
             cout << "\n";
         }
 };
+
 typedef map<string,vector<Course>> CourseOffered;
 class Instructor{
     private:
@@ -50,12 +51,30 @@ class Instructor{
         bool isProfessor();
         void addCourse(Course course);
         void removeCourse(string course);
+        void setJournalPapers(int journalPapers);
+        void setConferencePapers(int conferencePapers);
         void printCoursesOffered();
         void printInstructor(){
             cout << "Full Name: "  << fullName << "\nID: " << ID << "\nStarting Date: " << startingDate << "\nDepartment: " << department;
             cout << "\nLaboratory Name: " << laboratoryName << "\nJournal Papers: " << journalPapers << "\nConference Papers: " << conferencePapers;
             isProfessor() ? cout << "Professor\n" : cout << "not Professor\n";
         }
-
-
+};
+typedef map<string,vector<Course>> CourseOffered;
+typedef map<string,vector<string>> FacultyMembers;
+class Department{
+    private:
+        string deptName;
+        string facultyName;
+        string students; 
+        string deptPresidentName;
+        CourseOffered courseOffered;
+        FacultyMembers facultyMembers;
+    public:
+        Department(string deptName, string facultyName, string students, string deptPresidentName);
+        ~Department();
+        void addCourse(Course course);
+        void removeCourse(string course);
+        void printCoursesOffered();
+        
 };
