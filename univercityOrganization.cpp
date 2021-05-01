@@ -36,7 +36,7 @@ bool Instructor::isProfessor(){
 void Instructor::addCourse(Course course) {
     string semester = course.getSemester();
     courseOffered[semester].push_back(course);
-    }
+}
 void Instructor::removeCourse(string course) {
     for(auto& semesterCourses : courseOffered) {
         vector<Course>& courses = semesterCourses.second;
@@ -79,7 +79,30 @@ void Department::printCoursesOffered() {
     for(auto& semesterCourses : courseOffered) {  
         cout << "semester: " << semesterCourses.first << "\ncourses:\n";
         for(auto& courses : semesterCourses.second)
-          courses.printCourse();
+          courses.printInstructor();
+        cout << '\n';
+    }
+}
+
+Faculty::Faculty(string departments):
+    departments(departments){}
+
+Faculty::~Faculty(){}
+
+Student::Student(string takenCourses, string completedCourses,string letterGrades,int GPA):
+    takenCourses(takenCourses),GPA(GPA),completedCourses(completedCourses),letterGrades(letterGrades){}
+
+Student::~Student(){}
+
+int Student::getGPA(){
+    return GPA;
+}
+void Student::printTranscript() {
+    for(auto& grade : transcript) { 
+        vector<string>& course = grade.second; 
+        cout << "taken courses: " << grade.first << "\nletter grades:\n";
+        for(auto& course : grade.second)
+          course.printStudent();
         cout << '\n';
     }
 }
