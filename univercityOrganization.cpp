@@ -10,6 +10,9 @@ Course::~Course(){
 void Course::setSyllabus(string syllabus){
     this -> syllabus = syllabus;
 }
+string& Course::getSemester(){
+    return semester;
+}
 void Course::addPrerequisite(string prerequisite){
     prerequisiteCourses.push_back(prerequisite);
 }
@@ -26,7 +29,7 @@ void Instructor::setConferencePapers(int conferencePapers){
     this-> conferencePapers = conferencePapers; 
 }
 
-bool Instructor::isProfessor(){
+bool Instructor::Professor(){
     if(fullTime)
         cout << "is a professor\n";
     else
@@ -56,8 +59,8 @@ void Instructor::printCoursesOffered() {
     }
 }
 
-Department::Department(string deptName, string facultyName, string students, string deptPresidentName):
-    deptName(deptName), facultyName(facultyName), students(students), deptPresidentName(deptPresidentName){}
+Department::Department(string deptName, string facultyName, string deptPresidentName):
+    deptName(deptName), facultyName(facultyName), deptPresidentName(deptPresidentName){}
 
 Department::~Department(){}
 
@@ -83,11 +86,38 @@ void Department::printCoursesOffered() {
         cout << '\n';
     }
 }
+int Department::getNumOfStudent(){
+    cout << "Öğrenci sayısını girin:";
+    cin >> numOfStudent;
+    return numOfStudent;
+}
+void Department::addStudent(string students){
+    Students.push_back(students);
+}
 
-Faculty::Faculty(string departments):
-    departments(departments){}
+Faculty::Faculty(string departments,int numOfDepartment):
+    departments(departments),numOfDepartment(numOfDepartment){}
 
 Faculty::~Faculty(){}
+
+void Faculty::addDepartment(string departments){
+    Departments.push_back(departments);
+}
+int Faculty::getNumOfDepartment(){
+    cout << "Department sayısını girin:";
+    cin >> numOfDepartment;
+    return numOfDepartment;
+}
+int Faculty::getNumOfAdjunctFacultyMembers(){
+    cout << "Yardımcı Department sayısını girin:";
+    cin >> numOfAdjunctFacultyMembers;
+    return numOfAdjunctFacultyMembers;
+}
+int Faculty::getNumOfFacultyMember(){
+    cout << "Fakülte üyesi sayısını girin:";
+    cin >> numOfFacultyMember;
+    return numOfFacultyMember;
+}
 
 Student::Student(string takenCourses, string completedCourses,string letterGrades,int GPA):
     takenCourses(takenCourses),GPA(GPA),completedCourses(completedCourses),letterGrades(letterGrades){}
@@ -99,10 +129,10 @@ int Student::getGPA(){
 }
 void Student::printTranscript() {
     for(auto& grade : transcript) { 
-        vector<string>& course = grade.second; 
+        vector<string>& takenCourses = grade.second; 
         cout << "taken courses: " << grade.first << "\nletter grades:\n";
-        for(auto& course : grade.second)
-          course.printStudent();
+        for(auto& lettergrade : grade.second)
+          lettergrade.printStudent();
         cout << '\n';
     }
 }
