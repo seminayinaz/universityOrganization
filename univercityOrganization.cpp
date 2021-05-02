@@ -17,8 +17,8 @@ void Course::addPrerequisite(string prerequisite){
     prerequisiteCourses.push_back(prerequisite);
 }
 
-Instructor::Instructor(string fullName,int ID,int startingDate,int department,bool isProfessor,string laboratoryName):
-    fullName(fullName),ID(ID),startingDate(startingDate),department(department),fullTime(isProfessor),laboratoryName(laboratoryName){}
+Instructor::Instructor(string fullName,int ID,int startingDate,string department,bool Professor,string laboratoryName):
+    fullName(fullName),ID(ID),startingDate(startingDate),department(department),fullTime(Professor),laboratoryName(laboratoryName){}
 
 Instructor::~Instructor(){}
 
@@ -119,12 +119,12 @@ int Faculty::getNumOfFacultyMember(){
     return numOfFacultyMember;
 }
 
-Student::Student(string takenCourses, string completedCourses,string letterGrades,int GPA):
-    takenCourses(takenCourses),GPA(GPA),completedCourses(completedCourses),letterGrades(letterGrades){}
+Student::Student(string completedCourses,string letterGrades,float GPA):
+    GPA(GPA),completedCourses(completedCourses),letterGrades(letterGrades){}
 
 Student::~Student(){}
 
-int Student::getGPA(){
+float Student::getGPA(){
     return GPA;
 }
 void Student::printTranscript() {
