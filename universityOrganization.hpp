@@ -41,14 +41,14 @@ class Instructor : public UniversityMember {
         string fullName;
         int ID;
         int startingDate;
-        int department;
+        string department;
         bool fullTime;
         int journalPapers;
         int conferencePapers;
         string laboratoryName;
         CourseOffered courseOffered;
     public:
-        Instructor(string fullName,int ID,int startingDate,int department,bool isProfessor,string laboratoryName);
+        Instructor(string fullName,int ID,int startingDate,string department,bool Professor,string laboratoryName);
         ~Instructor();
         bool Professor();
         void addCourse(Course course);
@@ -124,21 +124,21 @@ class Student : public UniversityMember{
         string fullName;
         int ID;
         int startingDate;
-        string takenCourses;
+        vector<string> takenCourses;
         string completedCourses;
         string letterGrades;
-        int GPA;
+        float GPA;
         Transcript transcript;
         StudentClass studentClass;
     public:
-        Student(string takenCourses, string completedCourses,string letterGrades,int GPA);
+        Student(string completedCourses,string letterGrades,float GPA);
         ~Student();
-        int getGPA();
+        float getGPA();
         void failedCourses();
         void studentGrade();
         void printTranscript();
         void printStudent(){
-            cout << "Full Name: "  << fullName << "\nID: " << ID << "\nStarting Date: " << startingDate << "\nTaken courses: " << takenCourses;
+            cout << "Full Name: "  << fullName << "\nID: " << ID << "\nStarting Date: " << startingDate ;
             cout << "\nCompleted courses: " << completedCourses << "\nLetter grades: " << letterGrades << "\nGPA: " << GPA ; 
         }
 };
