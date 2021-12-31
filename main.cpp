@@ -9,7 +9,7 @@ int main(){
     Course course("FALL2019",4352,"CS",4,3);
     course.printCourse();
 
-    Instructor instructor("Aslı Yılmaz",2359,2017,"Engeneering",true,"Kimya");
+    Instructor instructor("Aslı Yılmaz",2359,2017,"Mühendisliği",true,"Kimya");
     instructor.printInstructor();
     instructor.addCourse(Course("YAZ204","CS","FALL2020",false));
     instructor.printCoursesOffered();
